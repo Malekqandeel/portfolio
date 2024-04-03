@@ -2,37 +2,68 @@ import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 
 
-import React from 'react';
+import React, { Suspense ,useEffect,useState } from 'react';
 import { design } from '../../assets';
+import Loader from '../Loader';
 
-const Background = ()=>{
+const Background = ({isMobile})=>{
   return (
     <mesh>
-      <Sphere args={[1,100,300]} scale={2.4}>
+      <Sphere args={[1,100,300]} scale={isMobile? 0.5:3.5}>
       <MeshDistortMaterial
       color="#663b87"
       attach="material"
       distort={0.5}
       speed={2}
       />
+      <spotLight position={[-20,50,10]}
+      angle={0.15}
+      penumbra={1}/>
       </Sphere>
+     
 
     </mesh>
   )
 }
 
 const Computers = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(()=>{
+    const mediaQuery = window.matchMedia('(max-width:0px)');
+
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange =(event)=>{
+      setIsMobile(event.matches);
+    }
+
+    mediaQuery.addEventListener('change',handleMediaQueryChange);
+
+    return ()=>{
+      mediaQuery.removeEventListener('change',handleMediaQueryChange)
+    }
+  },[])
+
   return (
-     <div className='flex justify-center items-center px-16'>
+     <div className='flex justify-center items-center px-16 w-1/2'>
       <div className='relative w-full max-w-lg h-[450px]'>
       
-      <Canvas className='absolute w-full h-[500px]'>
+      <Canvas
+      
+      camera={{ position:[20,10,5], fov:25}}
+      gl={{preserveDrawingBuffer:true}}>
+        <Suspense fallback={<Loader/>}>
+          <OrbitControls
+          enableZoom={false}
+          maxPolarAngle={Math.PI /2}
+          minPolarAngle={Math.PI /2}/>
+        </Suspense>
         <OrbitControls enableZoom={false}/>
         <directionalLight position={[3,2,1]}/>
-        <Background />
+        <Background isMobile={isMobile}/>
         
       </Canvas>
-      <img  className="absolute rounded-full top-0 -left-4 w-72 m-auto opacity-75 h-[350px] animate-[wiggle_1s_ease-in-out_infinite]" src={design} alt='pic'/>
+      <img  className=" absolute shadow-2xl rounded-full top-10 -left-4 w-72 m-20 opacity-75 h-[250px]  " src={design} alt='pic'/>
       </div>
       </div>
     
