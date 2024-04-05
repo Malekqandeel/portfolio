@@ -13,9 +13,9 @@ const  App=() => {
       <About/>
       <Tech/>
       <Works/>
-      <div className="relative z-0">
-        <Contact/>
+      <div className="relative ">
         <StarsCanvas/>
+        <Contact/>
       </div>
     </div>
     </BrowserRouter>

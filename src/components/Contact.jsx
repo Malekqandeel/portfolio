@@ -9,6 +9,7 @@ import { slideIn } from '../utils/motion';
 
 const Contact = () => {
   const formRef = useRef();
+  
   const [form, setForm] = useState({
     name:"",
     email:"",
@@ -16,9 +17,43 @@ const Contact = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange =(e)=>{}
+  const handleChange =(e)=>{
+    const {name,value}=e.target;
+    setForm({...form ,[name]:value})
+  }
 
-  const handleSubmit =(e)=>{}
+  const handleSubmit =(e)=>{
+    e.preventDefault();
+    setLoading(true);
+
+    //template_d4qm4fa
+//service_f0fa5ds
+//s4ctRVRYD8EZzLyQI
+
+    emailjs.send('service_f0fa5ds','template_d4qm4fa',
+    {
+      from_name: form.name,
+      to_name:"Malek",
+      from_email:form.email,
+      to_email:'malikqan@gmail.com',
+      message:form.message,
+    },'s4ctRVRYD8EZzLyQI').then(()=>{
+      setLoading(false);
+
+      alert(`Thank you ${form.name}! I will get back to you soon`);
+
+      setForm({
+        name:"",
+        email:"",
+        message:"",
+      })
+    },(error)=>{
+      setLoading(false);
+      console.log(error);
+
+      alert('Something went wrong!')
+    })
+  }
 
 
   return (
@@ -32,18 +67,21 @@ const Contact = () => {
         <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className='mt-12 flex flex-col gap-8'>
+        className='mt-12 flex flex-col gap-8'
+        >
           <label className='flex flex-col'>
             <span className='text-white font-medium mb-4'>Your Name</span>
             <input 
-            type='text'
-            name='name'
+            type="text"
+            name="name"
             value={form.name}
             onChange={handleChange}
             placeholder="what's your name?"
-            className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'/>
+            className='bg-tertiary z-auto py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium' />
+            
 
           </label>
+
           <label className='flex flex-col'>
             <span className='text-white font-medium mb-4'>Your Email</span>
             <input 
@@ -70,7 +108,6 @@ const Contact = () => {
           type='submit'
           className='bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'>
             {loading? 'Sending...': 'send'}
-
           </button>
         </form>
       </motion.div>

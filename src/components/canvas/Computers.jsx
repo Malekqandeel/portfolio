@@ -63,7 +63,7 @@ const Computers = () => {
         <Background isMobile={isMobile}/>
         
       </Canvas>
-      <img  className=" absolute shadow-2xl rounded-full top-10 -left-4 w-72 m-20 opacity-75 h-[250px]  " src={design} alt='pic'/>
+      
       </div>
       </div>
     
