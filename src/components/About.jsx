@@ -7,6 +7,7 @@ import { services } from '../constants';
 import {fadeIn, textVariant} from '../utils/motion';
 import { SectionWrapper } from '../hoc';
 
+// eslint-disable-next-line react/prop-types
 const ServiceCard = ({index,title,icon})=>{
   return (
     <Tilt className="xs:w-[250px] w-full">
@@ -44,11 +45,8 @@ const About = () => {
     <motion.p
     variants={fadeIn("","",0.1,1)}
     className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'>
-      Highly motivated in optimizing website performance, reducing development time, and collaborating with cross-functional teams to achieve project goals. Skilled in MongoDB, React, and Node.js, with a strong commitment to
-collaboration, troubleshooting, and delivering innovative solutions. To obtain a full-stack developer position
-where I can leverage my expertise in front-end and back-end development, as well as my knowledge of database
-management, to create innovative and efficient web applications that improve user experiences and drive
-business growth.
+      Results-driven Mid-Level Full-Stack Developer with a strong focus on optimizing website performance, improving development efficiency, and delivering scalable solutions. Proficient in MongoDB, React, and Node.js, with hands-on experience in building and maintaining robust web applications. Adept at collaborating with cross-functional teams, troubleshooting complex issues, and implementing best practices to enhance user experience. Passionate about writing clean, maintainable code and continuously improving development processes. Seeking opportunities to contribute my expertise in front-end and back-end development to drive innovation and business growth.
+
     </motion.p>
     <div className='mt-20 flex flex-wrap gap-10 '>
       {services.map((service,index)=>(

@@ -35,7 +35,17 @@ import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
 
+import orbit from './orbitik_logo.jpg'
+import ops from './opsheaven_technologies_logo.jpg'
+import itc from './itc_international_jo_logo.jpg'
+
+import backItc from './company/ITC.png'
+
 export {
+  backItc,
+  orbit,
+  ops,
+  itc,
   jQuery,
   boostrap,
   postgreSql,
